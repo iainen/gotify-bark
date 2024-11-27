@@ -5,7 +5,7 @@ version: '3'
 vars:
   NAME: gotify-bark
   VERSION: latest
-  TAG: ptah0/{{.NAME}}:{{.VERSION}}
+  TAG: bnsui/{{.NAME}}:{{.VERSION}}
   PLATFORM: linux/amd64,linux/arm64
 
 dotenv:
