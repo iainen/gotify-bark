@@ -17,7 +17,7 @@ The time zone inside the container is configurable via the `TZ` environment vari
 Docker RUN：
 
 ```bash
-$ docker run -dt -e TZ="Europe/Berlin" --env-file `pwd`/gotify-bark.env --name gotify-bark -p 8080:8080 -v `pwd`/gotify-bark-data:/app/data bnsui/gotify-bark
+$ docker run -dt -e TZ="Europe/Berlin" --env-file /var/gotify-bark/.env --name gotify-bark -p 8080:8080 -v /var/gotify-bark/data:/app/data bnsui/gotify-bark
 ```
 
 ### Supported Platforms:
