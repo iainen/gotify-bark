@@ -2,7 +2,7 @@ services:
 
   gotify-bark:
     container_name: gotify-bark
-    image: ptah0/gotify-bark
+    image: bnsui/gotify-bark
     restart: unless-stopped
-    env_file: .env
+    env_file: gotify-bark.env
 
