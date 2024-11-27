@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-package main // import "github.com/ptah0/gotify-bark"
+package main
 
 import (
 	"os"
 
-	"github.com/ptah0/gotify-bark/internal"
+	"github.com/bnsui/gotify-bark/internal"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -27,14 +27,14 @@ func main() {
 			&cli.StringFlag{
 				Name:     "gotify-url",
 				Aliases:  []string{"g"},
-				Usage:    "Gotify server URL",
+				Usage:    "Gotify server URL websocket",
 				EnvVars:  []string{"APP_GOTIFY_URL"},
 				Required: true,
 			},
 			&cli.StringFlag{
 				Name:     "gotify-key",
 				Aliases:  []string{"k"},
-				Usage:    "Gotify server auth key",
+				Usage:    "Gotify server CLIENTS TOKEN", // using clients token,not apps token!
 				EnvVars:  []string{"APP_GOTIFY_KEY"},
 				Required: true,
 			},
