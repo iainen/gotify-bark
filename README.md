@@ -13,7 +13,7 @@ A simple program forward gotify message to bark
 time zone: via the `TZ` environment variable, -e TZ="Europe/Berlin"
 
 ```bash
-$ docker run -dt -e TZ="Europe/Berlin" --env-file /var/gotify-bark/.env --name gotify-bark -p 8080:8080 -v /var/gotify-bark/data:/app/data bnsui/gotify-bark
+$ docker run -d --restart unless-stopped -e TZ="Europe/Berlin" --env-file /var/gotify-bark/.env --name gotify-bark -p 8080:8080 -v /var/gotify-bark/data:/app/data bnsui/gotify-bark
 ```
 
 ### Supported Platforms:
