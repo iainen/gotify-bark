@@ -31,8 +31,8 @@ jobs:
 
       # 构建 Docker 镜像，并打上合适的标签
       - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}/gotify-bark .
+        run: docker build -t ghcr.io/${{ github.repository }} .
 
       # 推送 Docker 镜像到 GitHub Packages
       - name: Push Docker image
-        run: docker push ghcr.io/${{ github.repository }}/gotify-bark
+        run: docker push ghcr.io/${{ github.repository }}
