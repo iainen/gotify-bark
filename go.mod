@@ -1,4 +1,4 @@
-module github.com/ptah0/gotify-bark
+module github.com/bnsui/gotify-bark
 
 go 1.23
 
