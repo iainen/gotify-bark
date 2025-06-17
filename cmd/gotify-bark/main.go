@@ -52,6 +52,13 @@ func main() {
 				EnvVars:  []string{"APP_BARK_DEVICE"},
 				Required: true,
 			},
+			&cli.StringSliceFlag{
+				Name:     "gotify-app-names",
+				Aliases:  []string{"a"},
+				Usage:    "gotify app names",
+				EnvVars:  []string{"APP_GOTIFY_APP_NAMES"},
+				Required: true,
+			},
 			&cli.BoolFlag{
 				Name:    "debug",
 				Usage:   "Enable debug output",
@@ -65,10 +72,11 @@ func main() {
 			}
 			// Run Core App
 			internal.Run(&internal.Config{
-				GotifyUrl:   c.String("gotify-url"),
-				GotifyKey:   c.String("gotify-key"),
-				BarkUrl:     c.String("bark-url"),
-				BarkDevices: c.StringSlice("bark-device"),
+				GotifyUrl:      c.String("gotify-url"),
+				GotifyKey:      c.String("gotify-key"),
+				BarkUrl:        c.String("bark-url"),
+				BarkDevices:    c.StringSlice("bark-device"),
+				GotifyAppNames: c.StringSlice("gotify-app-names"),
 			})
 			return nil
 		},

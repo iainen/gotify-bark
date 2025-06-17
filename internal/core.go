@@ -4,29 +4,42 @@ package internal // Package internal import "github.com/ptah0/gotify-bark/intern
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"net/http"
 	"net/url"
 	"os"
 	"os/signal"
+	"strconv"
+	"strings"
 	"time"
 
-	"github.com/goccy/go-json"
 	"github.com/gorilla/websocket"
 	"github.com/rs/zerolog/log"
 )
 
 type Config struct {
-	GotifyUrl   string
-	GotifyKey   string
-	BarkUrl     string
-	BarkDevices []string
+	GotifyUrl      string
+	GotifyKey      string
+	BarkUrl        string
+	BarkDevices    []string
+	GotifyAppNames []string
 }
+
+var (
+	gotifyAppNamesMap map[string]string
+)
 
 func Run(cfg *Config) {
 	// Actuator
 	startActuator()
-
+	gotifyAppNamesMap = make(map[string]string)
+	for _, a := range cfg.GotifyAppNames {
+		as := strings.Split(a, ":")
+		if len(as) == 2 {
+			gotifyAppNamesMap[as[0]] = as[1]
+		}
+	}
 	// Print out values
 	log.Info().
 		Str("GotifyUrl", cfg.GotifyUrl).
@@ -143,6 +156,7 @@ func sendPush(msg []byte, barkUrl string, dev string) {
 }
 
 type GotifyMsg struct {
+	Appid    int       `json:"appid"`
 	Title    string    `json:"title"`
 	Message  string    `json:"message"`
 	Priority int       `json:"priority"`
@@ -155,6 +169,7 @@ type BarkMsg struct {
 	Title     string `json:"title"`
 	Body      string `json:"body"`
 	Badge     int    `json:"badge"`
+	Group     string `json:"group"`
 }
 
 func convertMsg(m []byte, d string) []byte {
@@ -171,6 +186,7 @@ func convertMsg(m []byte, d string) []byte {
 		Title:     in.Title,
 		Body:      in.Message,
 		Badge:     int(1),
+		Group:     gotifyAppNamesMap[strconv.Itoa(in.Appid)],
 	})
 	if err != nil {
 		log.Warn().Err(err).Msg("Generate Bark message")
