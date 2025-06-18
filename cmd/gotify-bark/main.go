@@ -52,7 +52,7 @@ func main() {
 				EnvVars:  []string{"APP_BARK_DEVICE"},
 				Required: true,
 			},
-			&cli.StringSliceFlag{
+			&cli.StringFlag{
 				Name:     "gotify-app-names",
 				Aliases:  []string{"a"},
 				Usage:    "gotify app names",
@@ -76,7 +76,7 @@ func main() {
 				GotifyKey:      c.String("gotify-key"),
 				BarkUrl:        c.String("bark-url"),
 				BarkDevices:    c.StringSlice("bark-device"),
-				GotifyAppNames: c.StringSlice("gotify-app-names"),
+				GotifyAppNames: c.String("gotify-app-names"),
 			})
 			return nil
 		},

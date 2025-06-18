@@ -23,7 +23,7 @@ type Config struct {
 	GotifyKey      string
 	BarkUrl        string
 	BarkDevices    []string
-	GotifyAppNames []string
+	GotifyAppNames string
 }
 
 var (
@@ -34,10 +34,11 @@ func Run(cfg *Config) {
 	// Actuator
 	startActuator()
 	gotifyAppNamesMap = make(map[string]string)
-	for _, a := range cfg.GotifyAppNames {
-		as := strings.Split(a, ":")
-		if len(as) == 2 {
-			gotifyAppNamesMap[as[0]] = as[1]
+	as := strings.Split(cfg.GotifyAppNames, ",")
+	for _, a := range as {
+		ais := strings.Split(a, ":")
+		if len(ais) == 2 {
+			gotifyAppNamesMap[ais[0]] = ais[1]
 		}
 	}
 	// Print out values
